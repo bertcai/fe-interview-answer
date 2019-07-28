@@ -1,0 +1,46 @@
+# 问题
+
++ [html] 请描述一下cookies、sessionStorage和localStorage的区别？
++ [css] 说说你对低版本IE的盒子模型的理解
++ [js] 你是如何更好地处理Async/Await的异常的？
++ [软技能] 请列举出多种减少页面加载时间的方法
+
+## 回答
+
+> 请描述一下cookies、sessionStorage和localStorage的区别？
+
++ cookies，浏览器发送请求时会带上的东西，一般用来作为用户登录态检测等。
++ sessionStorage 属性允许你访问一个 session Storage 对象。…它与 localStorage 相似，不同之处在于 localStorage 里面存储的数据没有过期时间设置，而存储在 sessionStorage 里面的数据在页面会话结束时会被清除。
++ localStorage，存储一些网页数据，localStorage 里面存储的数据没有过期时间设置。
+
+
+> 说说你对低版本IE的盒子模型的理解
+
+低版本的IE盒子指的是 content包含padding和border在内的盒子模型
+即content宽高=width/height+padding2+border2
+
+可以通过设置`box-sizing:border-box`来指定使用IE盒子模型
+
+> 你是如何更好地处理Async/Await的异常的？
+
+使用`try-catch`包裹代码
+
+```javascript
+try {
+    const data = await asyncFn()
+    /* do sth w/ data */
+} catch (err) {
+    /* handle err */
+}
+```
+
+> 请列举出多种减少页面加载时间的方法
+
++ 使用高速cdn加载静态资源
+
++ 缓存利用： 缓存 Ajax，使用 CDN、外部 JavaScript 和 css 文件缓存，添加 Expires 头，在服务器端配置 Etag，减少 DNS 查找等。
++ 请求数量．合并样式和脚本，使用 css 图片精灵，初始首屏之外的图片资源按需加载，静态资源延迟加载。
++ 请求带宽：压缩文件，开启 GZIP 。
++ css 代码：避免使用 css 表达式、高级选择器、通配选择器 。
++ JavaScript 代码：用散列表来优化查找，少用全局变量，用 innerHTML 代替 DOM 操作，减少 DOM 操作次数，优化 JavaScript 性能，用 setTimeout 避免页面失去响应，缓 存 DOM 节点查找的结果，避免使用 with (with 会创建自己的作用域， 增加作用域链的 长度），多个变量声明合并。
++ HTML 代码：避免图片和 iFrame 等 src 属性为空 。 src 属性为空，会重新加载当前页面 ， 影响速度和效率 ， 尽量避免在 HTML 标签中写 Style 属性。
